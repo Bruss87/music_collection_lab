@@ -17,21 +17,26 @@ class Artist
     ($1)
     RETURNING id"
     values = [@name]
-    artists = Sqlrunner.run(sql, values)
+    artists = SqlRunner.run(sql, values)
     @id = artists[0]["id"].to_i
   end
 
   def Artist.all
     sql = "SELECT * FROM artists"
-    artists = Sqlrunner.run(sql)
+    artists = SqlRunner.run(sql)
     return artists.map { |artist| Artist.new(artist) }
   end
+
+  def Artist.delete_all
+      sql = "DELETE FROM artists"
+      SqlRunner.run(sql)
+    end
 
   def album
     sql = "SELECT * FROM albums
           WHERE artist_id = $1"
     values = [@id]
-    results = Sqlrunner.run(sql, values)
+    results = SqlRunner.run(sql, values)
     album_data = results[0]
     album = Album.new(album_data)
     return album

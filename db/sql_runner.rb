@@ -1,8 +1,8 @@
 require('pg')
 
-class Sqlrunner
+class SqlRunner
 
-  def Sqlrunner.run( sql, values = [] )  ## defaults 'value' to empty array if no 'value' argument passed
+  def SqlRunner.run( sql, values = [] )  ## defaults 'value' to empty array if no 'value' argument passed
 
     begin                                ## try catch - begin, ensure & end - tries to capture all eventualities
       db = PG.connect({dbname: 'music_collection', host: 'localhost'})
